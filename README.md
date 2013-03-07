@@ -3,6 +3,16 @@ smoothScroll
 
 A teeny tiny, standard compliant, smooth scroll script with ease-in-out effect and no jQuery (or any other dependancy, FWIW).
 
+How to use
+-
+Just include smoothscroll inside your page, like this:
+
+    <script src="https://raw.github.com/alicelieutier/smoothScroll/master/smoothscroll.js"></script>
+
+You're done!
+ 
+Of course, if you want some personalisation, or you do not want to be affected by any commit I may make on this file, you should just download it and include it locally to your project. 
+
 smoothscroll.js
 -
 This script will search for internal links and will add a smooth scrolling effect to navigate to anchors.
