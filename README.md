@@ -7,11 +7,11 @@ How to use
 -
 Just include smoothscroll inside your page, like this:
 
-    <script src="https://raw.github.com/alicelieutier/smoothScroll/master/smoothscroll.js"></script>
+    <script src="https://raw.github.com/alicelieutier/smoothScroll/master/smoothscroll.min.js"></script>
 
 You're done!
  
-Of course, if you want some personalisation, or you do not want to be affected by any commit I may make on this file, you should just download it and include it locally to your project. 
+Of course, if you want some personalisation, you should just download it and include it locally to your project. 
 
 smoothscroll.js
 -
@@ -21,13 +21,16 @@ It should work on IE9+ but I do not have one here to test.
 
 Unsupported browsers would just use the normal internal link behaviour.
 
-There is an easing function. You can change it quite easily in the code. Here is where I found the one I use:
+There is an ease-in-out type timing function. You can change it quite easily in the code. Here is where I found the one I use:
 - http://blog.greweb.fr/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/
+
+You can also change the total time of a scroll, which is 500ms by default.
 
 Example
 -
-The example.html file is the script applied to a w3c page. I just changed the style so the table of content is fixed to the left, and added the script.
-Check out the result. Wouldn't that be great?
+The example.html file is basically the script applied to a w3c page. I just changed the style so the table of content is fixed to the left.
+
+Check out the result. Wouldn't that be great if all w3c specs where that easy to navigate in?
 
 Similar scripts
 -
