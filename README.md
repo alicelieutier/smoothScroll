@@ -7,11 +7,9 @@ How to use
 -
 Just include smoothscroll inside your page, like this:
 
-    <script src="https://raw.github.com/alicelieutier/smoothScroll/master/smoothscroll.min.js"></script>
+    <script type="text/javascript" src="path/to/smoothscroll.min.js"></script>
 
-You're done!
- 
-Of course, if you want some personalisation, you should just download it and include it locally to your project. 
+Of course, if you want some personalisation, you should work with the unminified version of the script. 
 
 smoothscroll.js
 -
