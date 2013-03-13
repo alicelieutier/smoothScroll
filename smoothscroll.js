@@ -28,7 +28,8 @@ var position = function(start, end, ellapsed, time) {
 // We cannot rely on setInterval to execute a function at a regular interval
 // The idea is to recalculate the position we should be at and scroll there directly
 // every more or less 10ms.
-var smoothScroll = function(el, time){
+// if the callback exist, it is called when the scrolling is finished
+var smoothScroll = function(el, time, callback){
     time = time || 2000;
     var start = window.pageYOffset;
     var end = getTop(el);
@@ -38,6 +39,9 @@ var smoothScroll = function(el, time){
         window.scroll(0, position(start, end, ellapsed, time));
         if (ellapsed > time) {
             window.clearInterval(j);
+            if (typeof callback === 'function') {
+                callback(el);
+            }
         }
     }, 10);
 }
@@ -48,7 +52,10 @@ document.addEventListener("DOMContentLoaded", function () {
     for(var i=internal.length; a=internal[--i];){
         a.addEventListener("click", function(event){
             event.preventDefault();
-            smoothScroll(document.getElementById(this.href.split('#').pop()), 500); // <-- change the srolling time here
+             // change the srolling time in this call
+            smoothScroll(document.getElementById(this.href.split('#').pop()), 500, function(el){
+                window.location.hash = el.id;
+            });
         });
     }
 });
