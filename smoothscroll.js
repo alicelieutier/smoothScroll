@@ -17,12 +17,12 @@ var easeInOutCubic = function (t) { return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2
 
 // calculate the scroll position we should be in 
 // given the start and end point of the scroll
-// the time ellapsed from the beginning of the scroll
+// the time elapsed from the beginning of the scroll
 // and the total time the scroll should last (default 500ms)
-var position = function(start, end, ellapsed, time) {
-    if (ellapsed > time) return end;
-    return start + (end - start) * easeInOutCubic(ellapsed / time); // <-- you can change the easing funtion there
-    // return start + (end - start) * (ellapsed / time); // <-- this would give a linear scroll
+var position = function(start, end, elapsed, time) {
+    if (elapsed > time) return end;
+    return start + (end - start) * easeInOutCubic(elapsed / time); // <-- you can change the easing funtion there
+    // return start + (end - start) * (elapsed / time); // <-- this would give a linear scroll
 }
 
 // We cannot rely on setInterval to execute a function at a regular interval
@@ -35,9 +35,9 @@ var smoothScroll = function(el, time, callback){
     var end = getTop(el);
     var clock = Date.now();
     var j = window.setInterval(function(){
-        var ellapsed = Date.now() - clock;
-        window.scroll(0, position(start, end, ellapsed, time));
-        if (ellapsed > time) {
+        var elapsed = Date.now() - clock;
+        window.scroll(0, position(start, end, elapsed, time));
+        if (elapsed > time) {
             window.clearInterval(j);
             if (typeof callback === 'function') {
                 callback(el);
