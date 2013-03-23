@@ -46,17 +46,19 @@ var smoothScroll = function(el, time, callback){
     }, 10);
 }
 
+var linkHandler = function(ev) {
+    ev.preventDefault();
+    var hash = this.href.split('#').pop();
+    window.history.pushState(null, null, '#' + hash)
+     // change the srolling time in this call
+    smoothScroll(document.getElementById(hash), 500);
+}
+
 // We look for all the internal links in the documents and attach the smoothscroll function
 document.addEventListener("DOMContentLoaded", function () {
     var internal = document.querySelectorAll('a[href^="#"]'), a;
     for(var i=internal.length; a=internal[--i];){
-        a.addEventListener("click", function(event){
-            event.preventDefault();
-             // change the srolling time in this call
-            smoothScroll(document.getElementById(this.href.split('#').pop()), 500, function(el){
-                window.location.hash = el.id;
-            });
-        });
+        a.addEventListener("click", linkHandler);
     }
 });
 
