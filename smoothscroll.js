@@ -50,8 +50,13 @@ var linkHandler = function(ev) {
     ev.preventDefault();
     var hash = this.href.split('#').pop();
     window.history.pushState(null, null, '#' + hash)
-     // change the srolling time in this call
-    smoothScroll(document.getElementById(hash), 500);
+    //using the history api to solve issue #1 - back doesn't work 
+    // change the srolling time in this call
+    smoothScroll(document.getElementById(hash), 500, function(el) {
+        window.location.hash = el.id;
+        // necessary if we want to use the :target selector.
+        // the browser does not push a second state because the url hasn't changed.
+    });
 }
 
 // We look for all the internal links in the documents and attach the smoothscroll function
