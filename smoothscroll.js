@@ -1,4 +1,4 @@
-(function(){
+window.smoothScroll = (function(){
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE8 and below.
 if(!document.querySelectorAll || window.pageYOffset === undefined) { return; }
@@ -73,5 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
         a.addEventListener("click", linkHandler);
     }
 });
+
+// return smoothscroll API
+return smoothScroll;
 
 })();
