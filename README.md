@@ -14,8 +14,7 @@ Of course, if you want some personalisation, you should work with the unminified
 smoothscroll.js
 -
 This script will search for internal links and will add a smooth scrolling effect to navigate to anchors.
-This works in Firefox, Chrome, Opera and Safari.
-It should work on IE9+ but I do not have one here to test.
+This works in Firefox, Chrome, IE10, Opera and Safari.
 
 Unsupported browsers would just use the normal internal link behaviour.
 
