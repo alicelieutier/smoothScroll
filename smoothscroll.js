@@ -28,7 +28,7 @@ var position = function(start, end, elapsed, time) {
 // we use requestAnimationFrame to be called by the browser before every repaint
 // if the callback exist, it is called when the scrolling is finished
 var smoothScroll = function(el, time, callback){
-    time = time || 2000;
+    time = time || 500;
     var start = window.pageYOffset;
     var end = getTop(el);
     var clock = Date.now();
