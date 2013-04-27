@@ -1,9 +1,9 @@
 window.smoothScroll = (function(){
 // We do not want this script to be applied in browsers that do not support those
-// That means no smoothscroll on IE8 and below.
+// That means no smoothscroll on IE9 and below.
 if(!document.querySelectorAll || window.pageYOffset === undefined) { return; }
 
-// Get the top position of an element in the document 
+// Get the top position of an element in the document
 var getTop = function(element) {
     var top = element.offsetTop;
     while (element = element.offsetParent) {
