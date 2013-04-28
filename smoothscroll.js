@@ -18,17 +18,17 @@ var easeInOutCubic = function (t) { return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2
 // calculate the scroll position we should be in
 // given the start and end point of the scroll
 // the time elapsed from the beginning of the scroll
-// and the total time the scroll should last (default 500ms)
-var position = function(start, end, elapsed, time) {
-    if (elapsed > time) return end;
-    return start + (end - start) * easeInOutCubic(elapsed / time); // <-- you can change the easing funtion there
-    // return start + (end - start) * (elapsed / time); // <-- this would give a linear scroll
+// and the total duration of the scroll (default 500ms)
+var position = function(start, end, elapsed, duration) {
+    if (elapsed > duration) return end;
+    return start + (end - start) * easeInOutCubic(elapsed / duration); // <-- you can change the easing funtion there
+    // return start + (end - start) * (elapsed / duration); // <-- this would give a linear scroll
 }
 
 // we use requestAnimationFrame to be called by the browser before every repaint
 // if the callback exist, it is called when the scrolling is finished
-var smoothScroll = function(el, time, callback){
-    time = time || 500;
+var smoothScroll = function(el, duration, callback){
+    duration = duration || 500;
     var start = window.pageYOffset;
     var end = getTop(el);
     var clock = Date.now();
@@ -38,8 +38,8 @@ var smoothScroll = function(el, time, callback){
 
     var step = function(){
         var elapsed = Date.now() - clock;
-        window.scroll(0, position(start, end, elapsed, time));
-        if (elapsed > time) {
+        window.scroll(0, position(start, end, elapsed, duration));
+        if (elapsed > duration) {
             if (typeof callback === 'function') {
                 callback(el);
             }
@@ -57,7 +57,7 @@ var linkHandler = function(ev) {
     // using the history api to solve issue #1 - back doesn't work
     // most browser don't update :target when the history api is used:
     // THIS IS A BUG FROM THE BROWSERS.
-    // change the scrolling time in this call
+    // change the scrolling duration in this call
     smoothScroll(document.getElementById(hash), 500, function(el) {
         window.location.hash = el.id;
         // in Opera and Firefox, this will cause the :target to be activated.

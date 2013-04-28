@@ -18,11 +18,11 @@ Just include smoothscroll inside your page, like this:
 All your internal links will be tied to a smooth scroll.
 If you want to call a smooth scroll from your code, you can now use the API by calling:
 
-`window.smoothScroll(target, time, callback)`
+`window.smoothScroll(target, duration, callback)`
 
 where:
 * `target` is a `HTMLElement Object` from your document that you want to scroll TO.
-* `time` is the total time taken by the scroll (optional, defaults to 500ms)
+* `duration` is the total duration of the scroll (optional, defaults to 500ms)
 * `callback` is a function to be executed when the scrolling is over (optional)
 
 You can easily change the name of the global `smoothScroll` function returned by the script in the minified file, as it is the second word on the line.
@@ -36,7 +36,7 @@ Here are some indications if you want to tweak the code to fit your needs:
 There is an ease-in-out type timing function. You can change it quite easily in the code. Here is where I found the one I use:
 - http://blog.greweb.fr/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/
 
-You can also change the default time of a scroll, which is 500ms by default.
+You can also change the default duration of a scroll, which is 500ms by default.
 
 My code is **heavily** commented so you shoudn't lose yourself too much.
 
