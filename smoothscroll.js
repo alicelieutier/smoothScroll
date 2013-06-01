@@ -58,10 +58,7 @@ var linkHandler = function(ev) {
     // change the scrolling duration in this call
     smoothScroll(document.getElementById(this.hash.substring(1)), 500, function(el) {
         location.replace('#' + el.id)
-        // to activate :target in Google Chrome, use location.replace instead of location.hash
-
-        // IE internal-link color will not be changed. if you want to
-        // if (window.event) ev.srcElement.style.color = "purple"
+        // this will cause the :target to be activated.
     });
 }
 
