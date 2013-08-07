@@ -24,11 +24,19 @@ var position = function(start, end, elapsed, duration) {
 }
 
 // we use requestAnimationFrame to be called by the browser before every repaint
+// if the first argument is an element then scroll to the top of this element
+// if the first argument is numeric then scroll to this location
 // if the callback exist, it is called when the scrolling is finished
 var smoothScroll = function(el, duration, callback){
     duration = duration || 500;
     var start = window.pageYOffset;
-    var end = getTop(el);
+
+    if (typeof el === 'number') {
+      var end = parseInt(el);
+    } else {
+      var end = getTop(el);
+    }
+
     var clock = Date.now();
     var requestAnimationFrame = window.requestAnimationFrame ||
         window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
@@ -74,3 +82,4 @@ document.addEventListener("DOMContentLoaded", function () {
 return smoothScroll;
 
 })();
+
