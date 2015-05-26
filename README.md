@@ -1,7 +1,7 @@
 smoothScroll
 ============
 
-A teeny tiny, standard compliant, smooth scroll script with ease-in-out effect and no jQuery (or any other dependancy, FWIW).
+A teeny tiny, standard compliant, smooth scroll script with ease-in-out effect and no dependancy.
 
 smoothScroll will tie all your internal links to a handler that will produce a smooth scroll to their target instead of an instant jump. It also returns an API that you can use to call a smooth scroll yourself.
 
@@ -52,7 +52,7 @@ While I was looking for a name for this script, I found these sites. If this scr
 - http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript
 - http://www.kryogenix.org/code/browser/smoothscroll (best cross browser compatibility)
 
-Licence
+License
 -
-This library is released under the MIT licence.
+This library is released under the MIT license.
 
