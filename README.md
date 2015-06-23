@@ -15,6 +15,12 @@ Just include smoothscroll inside your page, like this:
 
     <script type="text/javascript" src="path/to/smoothscroll.min.js"></script>
 
+Alternatively, you can install smoothscroll as a dependency using npm:
+
+```
+npm install --save smoothscroll
+```
+
 All your internal links will be tied to a smooth scroll.
 If you want to call a smooth scroll from your code, you can now use the API by calling:
 
