@@ -1,3 +1,6 @@
+if (typeof window !== 'object') var window = {};
+if (typeof document !== 'object') var document = {};
+
 window.smoothScroll = (function(){
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE9 and below.
