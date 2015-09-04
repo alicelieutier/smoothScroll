@@ -1,3 +1,4 @@
+// For isomorphic/serverside rendering, specify unset window & document
 if (typeof window !== 'object') var window = {};
 if (typeof document !== 'object') var document = {};
 
