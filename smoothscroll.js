@@ -6,7 +6,7 @@ var globalWindow = typeof global === 'undefined' ? root : root.window;
 
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE9 and below.
-if(document.querySelectorAll === void 0 || globalWindow.pageYOffset === void 0 || history.pushState === void 0) { return; }
+if(globalWindow.document.querySelectorAll === void 0 || globalWindow.pageYOffset === void 0 || history.pushState === void 0) { return; }
 
 // Get the top position of an element in the document
 var getTop = function(element) {
