@@ -98,4 +98,4 @@ if (typeof exports !== "undefined") {
 // return smoothscroll API
 return smoothScroll;
 
-})(this);
+}).call(this);
