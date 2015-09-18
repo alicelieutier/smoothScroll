@@ -1,4 +1,17 @@
-window.smoothScroll = (function(){
+(function (root, smoothScroll) {
+  // Do not initialize when running server side, handle it in client:
+  if (typeof window !== 'object' || typeof document !== 'object') return;
+
+  if (typeof define === 'function' && define.amd) {
+    define(smoothScroll);
+  } else if (typeof exports === 'object') {
+    module.exports = smoothScroll();
+  } else {
+    root.smoothScroll = smoothScroll();
+  }
+})(this, function(){
+  'use strict';
+
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE9 and below.
 if(document.querySelectorAll === void 0 || window.pageYOffset === void 0 || history.pushState === void 0) { return; }
@@ -81,5 +94,4 @@ document.addEventListener("DOMContentLoaded", function () {
 // return smoothscroll API
 return smoothScroll;
 
-})();
-
+});
