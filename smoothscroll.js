@@ -1,21 +1,26 @@
-(function(){
-// Do not initialize when running server side, handle it in client:
-if (typeof window !== 'object' || typeof document !== 'object') return;
+(function (root, smoothScroll) {
+  // Do not initialize when running server side, handle it in client:
+  if (typeof window !== 'object' || typeof document !== 'object') return;
 
-var root = this;
-// In <script> tag context, `this` is the `window`.
-// In Node.js context, `this` is the node `global`.
-var globalWindow = typeof global === 'undefined' ? root : root.window;
+  if (typeof define === 'function' && define.amd) {
+    define(smoothScroll);
+  } else if (typeof exports === 'object') {
+    module.exports = smoothScroll();
+  } else {
+    root.smoothScroll = smoothScroll();
+  }
+})(this, function(){
+  'use strict';
 
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE9 and below.
-if(globalWindow.document.querySelectorAll === void 0 || globalWindow.pageYOffset === void 0 || history.pushState === void 0) { return; }
+if(document.querySelectorAll === void 0 || window.pageYOffset === void 0 || history.pushState === void 0) { return; }
 
 // Get the top position of an element in the document
 var getTop = function(element) {
     // return value of html.getBoundingClientRect().top ... IE : 0, other browsers : -pageYOffset
-    if(element.nodeName === 'HTML') return -globalWindow.pageYOffset
-    return element.getBoundingClientRect().top + globalWindow.pageYOffset;
+    if(element.nodeName === 'HTML') return -window.pageYOffset
+    return element.getBoundingClientRect().top + window.pageYOffset;
 }
 // ease in out function thanks to:
 // http://blog.greweb.fr/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/
@@ -37,7 +42,7 @@ var position = function(start, end, elapsed, duration) {
 // if the callback exist, it is called when the scrolling is finished
 var smoothScroll = function(el, duration, callback){
     duration = duration || 500;
-    var start = globalWindow.pageYOffset;
+    var start = window.pageYOffset;
 
     if (typeof el === 'number') {
       var end = parseInt(el);
@@ -46,13 +51,13 @@ var smoothScroll = function(el, duration, callback){
     }
 
     var clock = Date.now();
-    var requestAnimationFrame = globalWindow.requestAnimationFrame ||
-        globalWindow.mozRequestAnimationFrame || globalWindow.webkitRequestAnimationFrame ||
-        function(fn){globalWindow.setTimeout(fn, 15);};
+    var requestAnimationFrame = window.requestAnimationFrame ||
+        window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
+        function(fn){window.setTimeout(fn, 15);};
 
     var step = function(){
         var elapsed = Date.now() - clock;
-        globalWindow.scroll(0, position(start, end, elapsed, duration));
+        window.scroll(0, position(start, end, elapsed, duration));
         if (elapsed > duration) {
             if (typeof callback === 'function') {
                 callback(el);
@@ -67,35 +72,26 @@ var smoothScroll = function(el, duration, callback){
 var linkHandler = function(ev) {
     ev.preventDefault();
 
-    if (location.hash !== this.hash) globalWindow.history.pushState(null, null, this.hash)
+    if (location.hash !== this.hash) window.history.pushState(null, null, this.hash)
     // using the history api to solve issue #1 - back doesn't work
     // most browser don't update :target when the history api is used:
     // THIS IS A BUG FROM THE BROWSERS.
     // change the scrolling duration in this call
-    smoothScroll(globalWindow.document.getElementById(this.hash.substring(1)), 500, function(el) {
+    smoothScroll(document.getElementById(this.hash.substring(1)), 500, function(el) {
         location.replace('#' + el.id)
         // this will cause the :target to be activated.
     });
 }
 
 // We look for all the internal links in the documents and attach the smoothscroll function
-globalWindow.document.addEventListener("DOMContentLoaded", function () {
-    var internal = globalWindow.document.querySelectorAll('a[href^="#"]:not([href="#"])'), a;
+document.addEventListener("DOMContentLoaded", function () {
+    var internal = document.querySelectorAll('a[href^="#"]:not([href="#"])'), a;
     for(var i=internal.length; a=internal[--i];){
         a.addEventListener("click", linkHandler, false);
     }
 });
 
-if (typeof exports !== "undefined") {
-  if (typeof module !== "undefined" && module.exports) {
-    exports = module.exports = smoothScroll;
-  }
-  exports.smoothScroll = smoothScroll;
-} else {
-  root.smoothScroll = smoothScroll;
-}
-
 // return smoothscroll API
 return smoothScroll;
 
-}).call(this);
+});
