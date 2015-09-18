@@ -1,5 +1,5 @@
 (function(){
-// Do not initialize when running server side:
+// Do not initialize when running server side, handle it in client:
 if (typeof window !== 'object' || typeof document !== 'object') return;
 
 var root = this;
