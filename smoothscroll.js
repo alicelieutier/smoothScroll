@@ -1,5 +1,8 @@
-(function (window, smoothScroll) {
+(function (smoothScroll) {
   'use strict';
+
+  // Do not initialize smoothScroll when running server side, handle it in client:
+  if (typeof window !== 'object') return;
 
   // Support RequireJS and CommonJS/NodeJS module formats.
   // Attach smoothScroll to the `window` when executed as a <script>.
@@ -15,17 +18,10 @@
   // <script>
   } else if (typeof window === 'object') {
     window.smoothScroll = smoothScroll();
-
-  // Do not initialize smoothScroll when running server side, handle it in client:
-  } else {
-    return;
   }
 
-})(this, function(){
+})(function(){
 'use strict';
-
-// Do not initialize smoothScroll when running server side, handle it in client:
-if (typeof window !== 'object') return;
 
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE9 and below.
