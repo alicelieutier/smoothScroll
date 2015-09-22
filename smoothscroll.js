@@ -21,8 +21,11 @@
     return;
   }
 
-})(window, function(){
+})(this, function(){
 'use strict';
+
+// Do not initialize smoothScroll when running server side, handle it in client:
+if (typeof window !== 'object') return;
 
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE9 and below.
