@@ -25,10 +25,6 @@ where:
 * `duration` is the total duration of the scroll (optional, defaults to 500ms)
 * `callback` is a function to be executed when the scrolling is over (optional)
 
-You can easily change the name of the global `smoothScroll` function returned by the script in the minified file, as it is the second word on the line.
-
-Of course, if you want more personalisation, you should work with the unminified version of the script.
-
 Alternatively, you can install smoothscroll as a dependency using npm:
 
 ```
