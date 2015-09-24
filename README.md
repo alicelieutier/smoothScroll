@@ -35,7 +35,7 @@ Alternatively, you can install smoothscroll as a dependency using npm:
 npm install --save smoothscroll
 ```
 
-Example usage as a module:
+Example usage as a module, binding to a custom element:
 
 ```javascript
 var smoothScroll = require('smoothscroll');
