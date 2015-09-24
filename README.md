@@ -15,25 +15,43 @@ Just include smoothscroll inside your page, like this:
 
     <script type="text/javascript" src="path/to/smoothscroll.min.js"></script>
 
-Alternatively, you can install smoothscroll as a dependency using npm:
-
-```
-npm install --save smoothscroll
-```
-
 All your internal links will be tied to a smooth scroll.
 If you want to call a smooth scroll from your code, you can now use the API by calling:
 
 `window.smoothScroll(target, duration, callback)`
 
 where:
-* `target` is a `HTMLElement Object` from your document that you want to scroll to, or a numeric position on the page 
+* `target` is a `HTMLElement Object` from your document that you want to scroll to, or a numeric position on the page
 * `duration` is the total duration of the scroll (optional, defaults to 500ms)
 * `callback` is a function to be executed when the scrolling is over (optional)
 
 You can easily change the name of the global `smoothScroll` function returned by the script in the minified file, as it is the second word on the line.
 
 Of course, if you want more personalisation, you should work with the unminified version of the script.
+
+Alternatively, you can install smoothscroll as a dependency using npm:
+
+```
+npm install --save smoothscroll
+```
+
+Example usage as a module:
+
+```javascript
+var smoothScroll = require('smoothscroll');
+
+var exampleBtn = document.querySelector('.example-button');
+var exampleDestination = document.querySelector('.example-destination');
+
+// This function can easily be an onClick handler in React components
+var handleClick = function(event) {
+  event.preventDefault();
+
+  smoothScroll(exampleDestination);
+};
+
+exampleBtn.addEventListener('click', handleClick);
+```
 
 smoothscroll.js
 -
@@ -61,4 +79,3 @@ While I was looking for a name for this script, I found these sites. If this scr
 License
 -
 This library is released under the MIT license.
-
