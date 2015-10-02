@@ -18,12 +18,13 @@ Just include smoothscroll inside your page, like this:
 All your internal links will be tied to a smooth scroll.
 If you want to call a smooth scroll from your code, you can now use the API by calling:
 
-`window.smoothScroll(target, duration, callback)`
+`window.smoothScroll(target, duration, callback, context)`
 
 where:
 * `target` is a `HTMLElement Object` from your document that you want to scroll to, or a numeric position on the page
 * `duration` is the total duration of the scroll (optional, defaults to 500ms)
 * `callback` is a function to be executed when the scrolling is over (optional)
+* `context` is the scrolling context (optional, defaults to window, can be any `HTMLElement Object`)
 
 Alternatively, you can install smoothscroll as a dependency using npm:
 
