@@ -69,7 +69,7 @@ var smoothScroll = function(el, duration, callback, context){
 
     var step = function(){
         var elapsed = Date.now() - clock;
-        if (context != window) {
+        if (context !== window) {
         	context.scrollTop = position(start, end, elapsed, duration);
         }
         else {
