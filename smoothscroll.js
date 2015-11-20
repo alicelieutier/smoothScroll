@@ -34,7 +34,7 @@ var getTop = function(element, context) {
         return element.getBoundingClientRect().top + window.pageYOffset;
     }
     else {
-        return element.getBoundingClientRect().top - context.getBoundingClientRect().top;
+        return element.getBoundingClientRect().top - context.getBoundingClientRect().top + context.scrollTop;
     }
 }
 // ease in out function thanks to:
