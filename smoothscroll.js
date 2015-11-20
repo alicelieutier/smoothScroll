@@ -27,10 +27,15 @@ if (typeof window !== 'object') return;
 if(document.querySelectorAll === void 0 || window.pageYOffset === void 0 || history.pushState === void 0) { return; }
 
 // Get the top position of an element in the document
-var getTop = function(element) {
-    // return value of html.getBoundingClientRect().top ... IE : 0, other browsers : -pageYOffset
-    if(element.nodeName === 'HTML') return -window.pageYOffset
-    return element.getBoundingClientRect().top + window.pageYOffset;
+var getTop = function(element, context) {
+    if (context === window) {
+        // return value of html.getBoundingClientRect().top ... IE : 0, other browsers : -pageYOffset
+        if(element.nodeName === 'HTML') return -window.pageYOffset
+        return element.getBoundingClientRect().top + window.pageYOffset;
+    }
+    else {
+        return element.getBoundingClientRect().top - context.getBoundingClientRect().top;
+    }
 }
 // ease in out function thanks to:
 // http://blog.greweb.fr/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/
@@ -57,9 +62,9 @@ var smoothScroll = function(el, duration, callback, context){
     var start = window.pageYOffset;
 
     if (typeof el === 'number') {
-      var end = parseInt(el);
+      var end = el;
     } else {
-      var end = getTop(el);
+      var end = getTop(el, context);
     }
 
     var clock = Date.now();
