@@ -67,7 +67,7 @@ var smoothScroll = function(el, duration, callback, context){
       var end = getTop(el, context);
     }
 
-    let endContext = context === window ? document.body : context;
+    var endContext = context === window ? document.body : context;
     end = Math.min(end, endContext.scrollHeight - endContext.offsetHeight);
 
     var clock = Date.now();
