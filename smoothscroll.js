@@ -50,7 +50,7 @@ var position = function(start, end, elapsed, duration) {
 // if the first argument is an element then scroll to the top of this element
 // if the first argument is numeric then scroll to this location
 // if the callback exist, it is called when the scrolling is finished
-// if context is set then scroll that element, else scroll window 
+// if context is set then scroll that element, else scroll window
 var smoothScroll = function(el, duration, callback, context){
     duration = duration || 500;
     context = context || window;
@@ -101,13 +101,19 @@ var linkHandler = function(ev) {
     });
 }
 
-// We look for all the internal links in the documents and attach the smoothscroll function
-document.addEventListener("DOMContentLoaded", function () {
-    var internal = document.querySelectorAll('a[href^="#"]:not([href="#"])'), a;
-    for(var i=internal.length; a=internal[--i];){
-        a.addEventListener("click", linkHandler, false);
-    }
-});
+function init () {
+    // We look for all the internal links in the documents and attach the smoothscroll function
+   var internal = document.querySelectorAll('a[href^="#"]:not([href="#"])'), a;
+   for(var i=internal.length; a=internal[--i];){
+       a.removeEventListener("click", linkHandler, false); // ensure we don't duplicate the listener
+       a.addEventListener("click", linkHandler, false);
+   }
+}
+
+document.addEventListener("DOMContentLoaded", init);
+
+// expose init so we can re-initalize after programmatic dom changes
+smoothScroll.init = init;
 
 // return smoothscroll API
 return smoothScroll;
