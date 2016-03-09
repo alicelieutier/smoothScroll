@@ -105,6 +105,7 @@ function init () {
     // We look for all the internal links in the documents and attach the smoothscroll function
    var internal = document.querySelectorAll('a[href^="#"]:not([href="#"])'), a;
    for(var i=internal.length; a=internal[--i];){
+       if (a.hasAttribute('data-smoothscroll-ignore')) { continue; }
        a.removeEventListener("click", linkHandler, false); // ensure we don't duplicate the listener
        a.addEventListener("click", linkHandler, false);
    }

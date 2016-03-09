@@ -26,6 +26,8 @@ where:
 * `callback` is a function to be executed when the scrolling is over (optional)
 * `context` is the scrolling context (optional, defaults to window, can be any `HTMLElement Object`)
 
+Add "data-smoothscroll-ignore" attributes to links you want to leave alone.
+
 Alternatively, you can install smoothscroll as a dependency using npm:
 
 ```
