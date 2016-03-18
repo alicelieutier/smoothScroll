@@ -50,7 +50,7 @@ var position = function(start, end, elapsed, duration) {
 // if the first argument is an element then scroll to the top of this element
 // if the first argument is numeric then scroll to this location
 // if the callback exist, it is called when the scrolling is finished
-// if context is set then scroll that element, else scroll window 
+// if context is set then scroll that element, else scroll window
 var smoothScroll = function(el, duration, callback, context){
     duration = duration || 500;
     context = context || window;
@@ -95,7 +95,10 @@ var linkHandler = function(ev) {
     // most browser don't update :target when the history api is used:
     // THIS IS A BUG FROM THE BROWSERS.
     // change the scrolling duration in this call
-    smoothScroll(document.getElementById(this.hash.substring(1)), 500, function(el) {
+    var node = document.getElementById(this.hash.substring(1))
+    if(!node) return; // Do not scroll to non-existing node
+
+    smoothScroll(node, 500, function(el) {
         location.replace('#' + el.id)
         // this will cause the :target to be activated.
     });
