@@ -95,8 +95,16 @@ var linkHandler = function(ev) {
     // most browser don't update :target when the history api is used:
     // THIS IS A BUG FROM THE BROWSERS.
     // change the scrolling duration in this call
-    var node = document.getElementById(this.hash.substring(1))
-    if(!node) return; // Do not scroll to non-existing node
+    var hash_name = this.hash.substring(1);
+    var node = document.getElementById(hash_name);
+    if(!node) {
+        var nodes = document.getElementsByName(hash_name); 
+        if (nodes.length > 0) {
+          node = nodes[0];
+        } else {
+          return; // Do not scroll to non-existing node
+        }
+    }
 
     smoothScroll(node, 500, function(el) {
         location.replace('#' + el.id)
