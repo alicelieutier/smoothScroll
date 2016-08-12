@@ -51,6 +51,7 @@ var position = function(start, end, elapsed, duration) {
 // if the first argument is numeric then scroll to this location
 // if the callback exist, it is called when the scrolling is finished
 // if context is set then scroll that element, else scroll window
+// if marginTop is set then scroll will be smaller for this value (helper when site has fixed header/top)
 var smoothScroll = function(el, duration, callback, context){
     duration = duration || 500;
     context = context || window;
@@ -60,6 +61,10 @@ var smoothScroll = function(el, duration, callback, context){
       var end = parseInt(el);
     } else {
       var end = getTop(el);
+    }
+    
+    if (typeof(marginTop) === 'number') {
+        end -= marginTop;
     }
 
     var clock = Date.now();
