@@ -51,7 +51,8 @@ var position = function(start, end, elapsed, duration) {
 // if the first argument is numeric then scroll to this location
 // if the callback exist, it is called when the scrolling is finished
 // if context is set then scroll that element, else scroll window
-var smoothScroll = function(el, duration, callback, context){
+// if marginTop is set then scroll will be smaller for this value (helper when site has fixed header/top)
+var smoothScroll = function(el, duration, callback, context, marginTop){
     duration = duration || 500;
     context = context || window;
     var start = window.pageYOffset;
@@ -61,6 +62,11 @@ var smoothScroll = function(el, duration, callback, context){
     } else {
       var end = getTop(el);
     }
+    
+    if (typeof(marginTop) === 'number') {
+        end -= marginTop;
+    }
+    console.log(marginTop);
 
     var clock = Date.now();
     var requestAnimationFrame = window.requestAnimationFrame ||
@@ -97,11 +103,11 @@ var linkHandler = function(ev) {
     // change the scrolling duration in this call
     var node = document.getElementById(this.hash.substring(1))
     if(!node) return; // Do not scroll to non-existing node
-
-    smoothScroll(node, 500, function(el) {
-        location.replace('#' + el.id)
-        // this will cause the :target to be activated.
-    });
+    
+    var fixedHeader = document.querySelector('.smooth-scroll-header'), headerHeight = 0;
+    if (fixedHeader) headerHeight = fixedHeader.offsetHeight;
+    
+    smoothScroll(node, 500, false, false, headerHeight);
 }
 
 // We look for all the internal links in the documents and attach the smoothscroll function

@@ -22,10 +22,18 @@
   :target {
     background-color: yellow;
   }
+      .smooth-scroll-header {
+          position: fixed;
+          top: 0; left: 0;
+          width: 100%; height: 60px;
+          box-shadow: 0 0 5px 0 rgba(0, 0, 0, .7);
+          background-color: #ffffff;
+          z-index: 100;
+      }
   </style>
  <body>
   <script src="smoothscroll.js" type="text/javascript" charset="utf-8"></script>
-  
+  <header class="smooth-scroll-header"><h5>custom header</h5></header>
   
   <!-- From here, this is just a copy paste of w3.org page -->
   <div class=head> <!--begin-logo-->
