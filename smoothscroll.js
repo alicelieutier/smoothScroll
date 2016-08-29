@@ -49,18 +49,32 @@ var position = function(start, end, elapsed, duration) {
 // we use requestAnimationFrame to be called by the browser before every repaint
 // if the first argument is an element then scroll to the top of this element
 // if the first argument is numeric then scroll to this location
-// if the callback exist, it is called when the scrolling is finished
+// if the callback exists, it is called when the scrolling is finished
 // if context is set then scroll that element, else scroll window
-var smoothScroll = function(el, duration, callback, context){
-    duration = duration || 500;
-    context = context || window;
-    var start = window.pageYOffset;
+var smoothScroll = function(el){
+    var args = Array.prototype.slice.call(arguments, 1);
+
+    var options = {
+        duration: typeof args[0] !== 'object' ? args[0] : 500,
+        callback: args[1] || null,
+        context: args[2] || window,
+        offset: args[3] || 0,
+        start: window.pageYOffset
+    }
+
+    if (typeof args[0] === 'object') {
+        Object.keys(args[0]).forEach(function (option) {
+            options[option] = args[0][option]
+        })
+    }
 
     if (typeof el === 'number') {
       var end = parseInt(el);
     } else {
       var end = getTop(el);
     }
+
+    end = end + options.offset;
 
     var clock = Date.now();
     var requestAnimationFrame = window.requestAnimationFrame ||
@@ -69,16 +83,16 @@ var smoothScroll = function(el, duration, callback, context){
 
     var step = function(){
         var elapsed = Date.now() - clock;
-        if (context !== window) {
-        	context.scrollTop = position(start, end, elapsed, duration);
+        if (options.context !== window) {
+        	options.context.scrollTop = position(options.start, end, elapsed, options.duration);
         }
         else {
-        	window.scroll(0, position(start, end, elapsed, duration));
+        	window.scroll(0, position(options.start, end, elapsed, options.duration));
         }
 
-        if (elapsed > duration) {
-            if (typeof callback === 'function') {
-                callback(el);
+        if (elapsed > options.duration) {
+            if (typeof options.callback === 'function') {
+                options.callback(el);
             }
         } else {
             requestAnimationFrame(step);
