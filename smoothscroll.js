@@ -53,7 +53,6 @@ var position = function(start, end, elapsed, duration) {
 // if context is set then scroll that element, else scroll window
 var smoothScroll = function(el){
     var args = Array.prototype.slice.call(arguments, 1);
-
     var options = {
         duration: typeof args[0] !== 'object' ? args[0] : 500,
         callback: args[1] || null,
@@ -63,9 +62,9 @@ var smoothScroll = function(el){
     }
 
     if (typeof args[0] === 'object') {
-        Object.keys(args[0]).forEach(function (option) {
-            options[option] = args[0][option]
-        })
+      Object.keys(args[0]).forEach(function(option) {
+        options[option] = args[0][option]
+      })
     }
 
     if (typeof el === 'number') {
