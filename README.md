@@ -20,13 +20,15 @@ If you want to call a smooth scroll from your code, you can now use the API by c
 
 `window.smoothScroll(target, options)`
 
+where:
+* `options` is a plain object, containing the options listed below (optional)
+
 or
 
-`window.smoothScroll(target, [, duration][, callback][, context][, offset])`
+`window.smoothScroll(target [, duration][, callback][, context][, offset])`
 
 where:
 * `target` is a `HTMLElement Object` from your document that you want to scroll to, or a numeric position on the page
-* `options` is a plain object (optional)
 * `duration` is the total duration of the scroll (optional, defaults to 500ms)
 * `callback` is a function to be executed when the scrolling is over (optional)
 * `context` is the scrolling context (optional, defaults to window, can be any `HTMLElement Object`)
