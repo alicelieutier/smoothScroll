@@ -27,10 +27,10 @@ if (typeof window !== 'object') return;
 if(document.querySelectorAll === void 0 || window.pageYOffset === void 0 || history.pushState === void 0) { return; }
 
 // Get the top position of an element in the document
-var getTop = function(element) {
+var getTop = function(element, start) {
     // return value of html.getBoundingClientRect().top ... IE : 0, other browsers : -pageYOffset
-    if(element.nodeName === 'HTML') return -window.pageYOffset
-    return element.getBoundingClientRect().top + window.pageYOffset;
+    if(element.nodeName === 'HTML') return -start
+    return element.getBoundingClientRect().top + start
 }
 // ease in out function thanks to:
 // http://blog.greweb.fr/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/
@@ -54,12 +54,12 @@ var position = function(start, end, elapsed, duration) {
 var smoothScroll = function(el, duration, callback, context){
     duration = duration || 500;
     context = context || window;
-    var start = window.pageYOffset;
+    var start = context.scrollTop || window.pageYOffset;
 
     if (typeof el === 'number') {
       var end = parseInt(el);
     } else {
-      var end = getTop(el);
+      var end = getTop(el, start);
     }
 
     var clock = Date.now();
@@ -70,10 +70,10 @@ var smoothScroll = function(el, duration, callback, context){
     var step = function(){
         var elapsed = Date.now() - clock;
         if (context !== window) {
-        	context.scrollTop = position(start, end, elapsed, duration);
+          context.scrollTop = position(start, end, elapsed, duration);
         }
         else {
-        	window.scroll(0, position(start, end, elapsed, duration));
+          window.scroll(0, position(start, end, elapsed, duration));
         }
 
         if (elapsed > duration) {
