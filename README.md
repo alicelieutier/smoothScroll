@@ -50,6 +50,24 @@ var handleClick = function(event) {
 exampleBtn.addEventListener('click', handleClick);
 ```
 
+Example usage binding to a custom element specifying offset and duration:
+
+```javascript
+var smoothScroll = require('smoothscroll');
+
+var exampleBtn = document.querySelector('.example-button');
+var exampleDestination = document.querySelector('.example-destination');
+
+var handleClick = function(event) {
+  event.preventDefault();
+
+  // This will scroll 100px above the exampleDestination element in 300 milliseconds
+  smoothScroll(exampleDestination, -100, 300);
+};
+
+exampleBtn.addEventListener('click', handleClick);
+```
+
 smoothscroll.js
 -
 Here are some indications if you want to tweak the code to fit your needs:
