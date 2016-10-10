@@ -15,7 +15,7 @@ Just include smoothscroll inside your page, like this:
 
     <script type="text/javascript" src="path/to/smoothscroll.min.js"></script>
 
-All your internal links will be tied to a smooth scroll.
+All your internal links with the `scroll` class will be tied to a smooth scroll.
 If you want to call a smooth scroll from your code, you can now use the API by calling:
 
 `window.smoothScroll(target, offset, duration, callback, context)`
@@ -38,7 +38,7 @@ Example usage as a module, binding to a custom element:
 ```javascript
 var smoothScroll = require('smoothscroll');
 
-var exampleBtn = document.querySelector('.example-button');
+var exampleBtn = document.querySelector('.scroll.example-button');
 var exampleDestination = document.querySelector('.example-destination');
 
 // This function can easily be an onClick handler in React components
@@ -56,7 +56,7 @@ Example usage binding to a custom element specifying offset and duration:
 ```javascript
 var smoothScroll = require('smoothscroll');
 
-var exampleBtn = document.querySelector('.example-button');
+var exampleBtn = document.querySelector('.scroll.example-button');
 var exampleDestination = document.querySelector('.example-destination');
 
 var handleClick = function(event) {

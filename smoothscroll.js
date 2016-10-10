@@ -108,7 +108,7 @@ var linkHandler = function(ev) {
 
 // We look for all the internal links in the documents and attach the smoothscroll function
 document.addEventListener("DOMContentLoaded", function () {
-    var internal = document.querySelectorAll('a[href^="#"]:not([href="#"])'), a;
+    var internal = document.querySelectorAll('a.scroll[href^="#"]:not([href="#"])'), a;
     for(var i=internal.length; a=internal[--i];){
         a.addEventListener("click", linkHandler, false);
     }
