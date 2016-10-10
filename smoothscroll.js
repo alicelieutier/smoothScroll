@@ -49,17 +49,19 @@ var position = function(start, end, elapsed, duration) {
 // we use requestAnimationFrame to be called by the browser before every repaint
 // if the first argument is an element then scroll to the top of this element
 // if the first argument is numeric then scroll to this location
+// if the second argument is numeric then offset the end position by this value
 // if the callback exist, it is called when the scrolling is finished
 // if context is set then scroll that element, else scroll window
-var smoothScroll = function(el, duration, callback, context){
+var smoothScroll = function(el, offset, duration, callback, context){
     duration = duration || 500;
+    offset = offset || 0;
     context = context || window;
     var start = context.scrollTop || window.pageYOffset;
 
     if (typeof el === 'number') {
-      var end = parseInt(el);
+      var end = parseInt(el) + offset;
     } else {
-      var end = getTop(el, start);
+      var end = getTop(el, start) + offset;
     }
 
     var clock = Date.now();
@@ -106,7 +108,7 @@ var linkHandler = function(ev) {
 
 // We look for all the internal links in the documents and attach the smoothscroll function
 document.addEventListener("DOMContentLoaded", function () {
-    var internal = document.querySelectorAll('a[href^="#"]:not([href="#"])'), a;
+    var internal = document.querySelectorAll('a.scroll[href^="#"]:not([href="#"])'), a;
     for(var i=internal.length; a=internal[--i];){
         a.addEventListener("click", linkHandler, false);
     }
