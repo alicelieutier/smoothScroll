@@ -1,0 +1,26 @@
+{
+  "name": "micro-smoothscroll",
+  "description": "Yet another smooth scroller. Microsized.",
+  "main": "smoothscroll.js",
+  "authors": [
+    "Alice Lieutier <alice@lieutier.me> (http://alice.lieutier.me)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "smooth",
+    "scroll",
+    "scroll",
+    "no",
+    "jQuery",
+    "anchor",
+    "microjs"
+  ],
+  "homepage": "https://github.com/alicelieutier/smoothScroll",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
