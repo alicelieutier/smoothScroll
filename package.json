@@ -1,6 +1,6 @@
 {
   "name": "smoothscroll",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A teeny tiny smooth scroll script with ease-in-out effect and no jQuery.",
   "main": "smoothscroll.js",
   "author": "Alice Lieutier <alice@lieutier.me> (http://alice.lieutier.me)",
