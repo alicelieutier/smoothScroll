@@ -112,6 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+// Expose two methods which allow to add/remove listener to single element rather than ‘document.querySelectorAll’
+smoothScroll.addListenerTo = function (element){
+    element.addEventListener("click", linkHandler, false);
+};
+smoothScroll.removeListenerFrom = function (element){
+    element.removeEventListener("click", linkHandler, false);
+};
+
 // return smoothscroll API
 return smoothScroll;
 
