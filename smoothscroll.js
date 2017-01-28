@@ -51,10 +51,11 @@ var position = function(start, end, elapsed, duration) {
 // if the first argument is numeric then scroll to this location
 // if the callback exist, it is called when the scrolling is finished
 // if context is set then scroll that element, else scroll window
-var smoothScroll = function(el, duration, callback, context){
+var smoothScroll = function(el, duration, buffer, callback, context){
     duration = duration || 500;
     context = context || window;
-    var start = context.scrollTop || window.pageYOffset;
+    buffer = buffer || 0;
+    var start = context.scrollTop + buffer || window.pageYOffset + buffer;
 
     if (typeof el === 'number') {
       var end = parseInt(el);
