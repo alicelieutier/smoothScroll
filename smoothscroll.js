@@ -54,7 +54,7 @@ var position = function(start, end, elapsed, duration) {
 var smoothScroll = function(el, duration, buffer, callback, context){
 		duration = duration || 500;
 		context = context || window;
-		var start = context.scrollTop + buffer || window.pageYOffset;
+		var start = ( context.scrollTop || window.pageYOffset ) + buffer;
 
 		if (typeof el === 'number') {
 			var end = parseInt(el);
