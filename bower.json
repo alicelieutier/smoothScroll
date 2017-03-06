@@ -1,6 +1,6 @@
 {
-  "name": "micro-smoothscroll",
-  "description": "Yet another smooth scroller. Microsized.",
+  "name": "micro.smoothscroll",
+  "description": "Yet another smooth scroller.",
   "main": "smoothscroll.js",
   "authors": [
     "Alice Lieutier <alice@lieutier.me> (http://alice.lieutier.me)"
@@ -15,7 +15,7 @@
     "anchor",
     "microjs"
   ],
-  "homepage": "https://github.com/alicelieutier/smoothScroll",
+  "homepage": "https://github.com/rockfield/smoothScroll",
   "ignore": [
     "**/.*",
     "node_modules",
