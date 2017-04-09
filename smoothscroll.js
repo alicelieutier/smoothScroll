@@ -92,18 +92,16 @@ var smoothScroll = function (el, duration, buffer, callback, context) {
 var linkHandler = function(ev) {
 		ev.preventDefault();
 
-		if (location.hash !== this.hash) {
-			window.history.pushState(null, null, this.hash);
-		}
-		// using the history api to solve issue #1 - back doesn't work
-		// most browser don't update :target when the history api is used:
-		// THIS IS A BUG FROM THE BROWSERS.
-		// change the scrolling duration in this call
 		var node = document.getElementById(this.hash.substring(1));
+		
 		if(!node) { return; } // Do not scroll to non-existing node
 
 		smoothScroll(node, 500, 0, function(el) {
-				location.replace('#' + el.id);
+				try {
+					window.location.hash = el.id;
+				} catch (err) {
+					console.err(err);
+				}
 				// this will cause the :target to be activated.
 		});
 }
