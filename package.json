@@ -5,8 +5,8 @@
   "main": "smoothscroll.js",
   "author": "Alice Lieutier <alice@lieutier.me> (http://alice.lieutier.me)",
   "license": "MIT",
-  "homepage": "https://github.com/alicelieutier/smoothScroll#readme",
-  "repository": "https://github.com/alicelieutier/smoothScroll.git",
+  "homepage": "https://github.com/rockfield/smoothScroll#readme",
+  "repository": "https://github.com/rockfield/smoothScroll.git",
   "keywords": [ "smooth scroll", "scroll", "no jQuery", "anchor" ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
