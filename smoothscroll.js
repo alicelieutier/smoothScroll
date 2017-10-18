@@ -24,7 +24,7 @@ if (typeof window !== 'object') return;
 
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE9 and below.
-if(document.querySelectorAll === void 0 || window.pageYOffset === void 0 || history.pushState === void 0) { return; }
+if(document.querySelectorAll === void 0 || window.pageYOffset === void 0 || window.history.pushState === void 0) { return; }
 
 // Get the top position of an element in the document
 var getTop = function(element, start) {
