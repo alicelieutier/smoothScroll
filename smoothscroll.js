@@ -58,6 +58,8 @@ var smoothScroll = function(el, duration, callback, context){
 
     if (typeof el === 'number') {
       var end = parseInt(el);
+    } else if (typeof el === 'string') {
+      var end = getTop(document.querySelector(el), start)
     } else {
       var end = getTop(el, start);
     }
