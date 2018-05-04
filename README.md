@@ -18,7 +18,15 @@ Just include smoothscroll inside your page, like this:
 All your internal links will be tied to a smooth scroll.
 If you want to call a smooth scroll from your code, you can now use the API by calling:
 
-`window.smoothScroll(target, duration, callback, context)`
+`window.smoothScroll(target, options)`
+
+where:
+
+* `options` is a plain object, containing the options listed below (optional)
+
+or
+
+`window.smoothScroll(target [, duration][, callback][, context][, offset])`
 
 where:
 * `target` is a `HTMLElement Object` from your document that you want to scroll to, or a numeric position on the page
