@@ -44,23 +44,33 @@ var position = function(start, end, elapsed, duration) {
     if (elapsed > duration) return end;
     return start + (end - start) * easeInOutCubic(elapsed / duration); // <-- you can change the easing funtion there
     // return start + (end - start) * (elapsed / duration); // <-- this would give a linear scroll
-}
+};
 
 // we use requestAnimationFrame to be called by the browser before every repaint
 // if the first argument is an element then scroll to the top of this element
 // if the first argument is numeric then scroll to this location
 // if the callback exist, it is called when the scrolling is finished
 // if context is set then scroll that element, else scroll window
-var smoothScroll = function(el, duration, callback, context){
-    duration = duration || 500;
-    context = context || window;
-    var start = context.scrollTop || window.pageYOffset;
+var smoothScroll = function(el){
+    var args = Array.prototype.slice.call(arguments, 1);
+    var optionsArg = typeof args[0] === 'object' && args[0];
+    var options = {
+        duration: optionsArg && optionsArg.duration || args[0] || 500,
+        callback: optionsArg && optionsArg.callback || args[1] || null,
+        context: optionsArg && optionsArg.context || args[2] || window,
+        offset: optionsArg && optionsArg.offset || args[3] || 0,
+        start: optionsArg && window.pageYOffset
+    };
+
+    var end;
 
     if (typeof el === 'number') {
-      var end = parseInt(el);
+      end = parseInt(el);
     } else {
-      var end = getTop(el, start);
+      end = getTop(el, options.start);
     }
+
+    end = end + options.offset;
 
     var clock = Date.now();
     var requestAnimationFrame = window.requestAnimationFrame ||
@@ -69,42 +79,42 @@ var smoothScroll = function(el, duration, callback, context){
 
     var step = function(){
         var elapsed = Date.now() - clock;
-        if (context !== window) {
-          context.scrollTop = position(start, end, elapsed, duration);
+        if (options.context !== window) {
+          options.context.scrollTop = position(options.start, end, elapsed, options.duration);
         }
         else {
-          window.scroll(0, position(start, end, elapsed, duration));
+          window.scroll(0, position(options.start, end, elapsed, options.duration));
         }
 
-        if (elapsed > duration) {
-            if (typeof callback === 'function') {
-                callback(el);
+        if (elapsed > options.duration) {
+            if (typeof options.callback === 'function') {
+                options.callback(el);
             }
         } else {
             requestAnimationFrame(step);
         }
-    }
+    };
     step();
-}
+};
 
 var linkHandler = function(ev) {
     if (!ev.defaultPrevented) {
         ev.preventDefault();
 
-        if (location.hash !== this.hash) window.history.pushState(null, null, this.hash)
+        if (location.hash !== this.hash) window.history.pushState(null, null, this.hash);
         // using the history api to solve issue #1 - back doesn't work
         // most browser don't update :target when the history api is used:
         // THIS IS A BUG FROM THE BROWSERS.
         // change the scrolling duration in this call
-        var node = document.getElementById(this.hash.substring(1))
+        var node = document.getElementById(this.hash.substring(1));
         if (!node) return; // Do not scroll to non-existing node
 
         smoothScroll(node, 500, function (el) {
-            location.replace('#' + el.id)
+            location.replace('#' + el.id);
             // this will cause the :target to be activated.
         });
     }
-}
+};
 
 // We look for all the internal links in the documents and attach the smoothscroll function
 document.addEventListener("DOMContentLoaded", function () {
